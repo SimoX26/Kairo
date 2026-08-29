@@ -1,7 +1,7 @@
 import { Preferences } from '@capacitor/preferences';
 import { createInitialState, defaultSettings } from '../data';
 import { phaseDurationSeconds } from '../lib/timers';
-import type { Activity, AppState, PomodoroState, Session, TimeSegment } from '../types';
+import type { Activity, AppState, AppTheme, PomodoroState, Session, TimeSegment } from '../types';
 
 const STORAGE_KEY = 'kairo.app-state.v1';
 
@@ -51,6 +51,11 @@ function normalizeSessions(value: unknown): Session[] {
     .map((session) => ({ ...session, segments: normalizeSegments(session.segments) }));
 }
 
+function normalizeTheme(value: unknown): AppTheme {
+  if (value === 'light' || value === 'nature-dark' || value === 'nature-light') return value;
+  return 'dark';
+}
+
 export function normalizeState(value: unknown): AppState {
   const fallback = createInitialState();
   if (!value || typeof value !== 'object') return fallback;
@@ -61,7 +66,7 @@ export function normalizeState(value: unknown): AppState {
   const settings = {
     ...defaultSettings,
     ...(candidate.settings ?? {}),
-    theme: candidate.settings?.theme === 'light' ? 'light' as const : 'dark' as const,
+    theme: normalizeTheme(candidate.settings?.theme),
   };
   const rawPomodoro = candidate.pomodoro as Partial<PomodoroState> | undefined;
   const phase = rawPomodoro?.phase === 'shortBreak' || rawPomodoro?.phase === 'longBreak' ? rawPomodoro.phase : 'focus';

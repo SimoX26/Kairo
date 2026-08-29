@@ -97,7 +97,13 @@ export function AppStoreProvider({ children }: PropsWithChildren) {
   }, [state.settings.motion]);
 
   useEffect(() => {
-    const themeColor = state.settings.theme === 'light' ? '#f6f7fc' : '#080b17';
+    const themeColor = state.settings.theme === 'light'
+      ? '#f6f7fc'
+      : state.settings.theme === 'nature-light'
+        ? '#eef6ed'
+        : state.settings.theme === 'nature-dark'
+          ? '#07150e'
+          : '#080b17';
     document.documentElement.dataset.theme = state.settings.theme;
     document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', themeColor);
     void configureNativeShell(state.settings.theme);

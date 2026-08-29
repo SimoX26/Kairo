@@ -10,9 +10,17 @@ const EXACT_ALARM_PROMPTED_KEY = 'kairo.exact-alarm-prompted';
 
 export async function configureNativeShell(theme: AppTheme = 'dark'): Promise<void> {
   if (!Capacitor.isNativePlatform()) return;
+  const light = theme === 'light' || theme === 'nature-light';
+  const backgroundColor = theme === 'light'
+    ? '#f6f7fc'
+    : theme === 'nature-light'
+      ? '#eef6ed'
+      : theme === 'nature-dark'
+        ? '#07150e'
+        : '#080b17';
   await Promise.allSettled([
-    StatusBar.setStyle({ style: theme === 'light' ? Style.Dark : Style.Light }),
-    StatusBar.setBackgroundColor({ color: theme === 'light' ? '#f6f7fc' : '#080b17' }),
+    StatusBar.setStyle({ style: light ? Style.Dark : Style.Light }),
+    StatusBar.setBackgroundColor({ color: backgroundColor }),
   ]);
 }
 

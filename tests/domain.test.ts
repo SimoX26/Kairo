@@ -158,4 +158,11 @@ describe('tema', () => {
 
     expect(normalized.settings.theme).toBe('light');
   });
+
+  it.each(['nature-dark', 'nature-light'] as const)('mantiene il tema %s salvato', (theme) => {
+    const state = createInitialState();
+    const normalized = normalizeState({ ...state, settings: { ...state.settings, theme } });
+
+    expect(normalized.settings.theme).toBe(theme);
+  });
 });

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { AppSettings } from '../types';
+import type { AppSettings, AppTheme } from '../types';
 import { Icon } from './Icon';
 import { Sheet } from './Sheet';
 
@@ -10,6 +10,13 @@ interface SettingsSheetProps {
   onSave: (settings: AppSettings) => void;
   onReset: () => Promise<void>;
 }
+
+const themes: { value: AppTheme; label: string; hint: string }[] = [
+  { value: 'dark', label: 'Kairo scuro', hint: 'Notte viola' },
+  { value: 'light', label: 'Kairo chiaro', hint: 'Luce pulita' },
+  { value: 'nature-dark', label: 'Natura scura', hint: 'Giardino notturno' },
+  { value: 'nature-light', label: 'Natura chiara', hint: 'Mattino botanico' },
+];
 
 function Toggle({ checked, onChange, label, hint }: { checked: boolean; onChange: (value: boolean) => void; label: string; hint?: string }) {
   return (
@@ -65,9 +72,13 @@ export function SettingsSheet({ open, settings, onClose, onSave, onReset }: Sett
         <h3>Esperienza</h3>
         <fieldset className="theme-choice">
           <legend>Tema</legend>
-          <div className="segmented segmented--two">
-            {([['dark', 'Scuro'], ['light', 'Chiaro']] as const).map(([value, label]) => (
-              <button key={value} type="button" aria-pressed={draft.theme === value} className={draft.theme === value ? 'is-active' : ''} onClick={() => setDraft({ ...draft, theme: value })}>{label}</button>
+          <div className="theme-grid">
+            {themes.map((theme) => (
+              <button key={theme.value} type="button" aria-pressed={draft.theme === theme.value} className={`theme-option ${draft.theme === theme.value ? 'is-active' : ''}`} onClick={() => setDraft({ ...draft, theme: theme.value })}>
+                <span className={`theme-preview theme-preview--${theme.value}`} aria-hidden="true"><i /><i /></span>
+                <span><strong>{theme.label}</strong><small>{theme.hint}</small></span>
+                {draft.theme === theme.value && <Icon name="check" size={16} />}
+              </button>
             ))}
           </div>
         </fieldset>

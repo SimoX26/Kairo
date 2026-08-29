@@ -38,7 +38,7 @@ export interface RunningTimer {
 }
 
 export type PomodoroPhase = 'focus' | 'shortBreak' | 'longBreak';
-export type AppTheme = 'dark' | 'light';
+export type AppTheme = 'dark' | 'light' | 'nature-dark' | 'nature-light';
 
 export interface PomodoroState {
   phase: PomodoroPhase;
