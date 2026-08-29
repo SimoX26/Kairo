@@ -3,16 +3,16 @@ import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { Preferences } from '@capacitor/preferences';
 import { StatusBar, Style } from '@capacitor/status-bar';
-import type { PomodoroPhase } from '../types';
+import type { AppTheme, PomodoroPhase } from '../types';
 
 const POMODORO_NOTIFICATION_ID = 2515;
 const EXACT_ALARM_PROMPTED_KEY = 'kairo.exact-alarm-prompted';
 
-export async function configureNativeShell(): Promise<void> {
+export async function configureNativeShell(theme: AppTheme = 'dark'): Promise<void> {
   if (!Capacitor.isNativePlatform()) return;
   await Promise.allSettled([
-    StatusBar.setStyle({ style: Style.Light }),
-    StatusBar.setBackgroundColor({ color: '#080b17' }),
+    StatusBar.setStyle({ style: theme === 'light' ? Style.Dark : Style.Light }),
+    StatusBar.setBackgroundColor({ color: theme === 'light' ? '#f6f7fc' : '#080b17' }),
   ]);
 }
 

@@ -9,6 +9,7 @@ import {
   startOfWeek,
 } from '../src/lib/date';
 import { runningTimerSeconds, runningTimerSecondsInRange } from '../src/lib/timers';
+import { normalizeState } from '../src/services/storage';
 import { appReducer } from '../src/store/reducer';
 import type { Session } from '../src/types';
 
@@ -139,5 +140,22 @@ describe('calendario e report', () => {
     const { current, previous } = getComparableReportRanges('week', new Date('2026-08-27T12:00:00+02:00'));
     expect(current.end.getTime() - current.start.getTime()).toBe(previous.end.getTime() - previous.start.getTime());
     expect(current.start.getDay()).toBe(1);
+  });
+});
+
+describe('tema', () => {
+  it('mantiene il tema scuro per i dati esistenti senza preferenza', () => {
+    const state = createInitialState();
+    const { theme: _theme, ...legacySettings } = state.settings;
+    const normalized = normalizeState({ ...state, settings: legacySettings });
+
+    expect(normalized.settings.theme).toBe('dark');
+  });
+
+  it('mantiene il tema chiaro salvato', () => {
+    const state = createInitialState();
+    const normalized = normalizeState({ ...state, settings: { ...state.settings, theme: 'light' } });
+
+    expect(normalized.settings.theme).toBe('light');
   });
 });

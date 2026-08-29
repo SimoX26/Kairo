@@ -58,7 +58,11 @@ export function normalizeState(value: unknown): AppState {
   const candidate = value as Partial<AppState>;
   const activities = normalizeActivities(candidate.activities, fallback.activities);
   const activeActivities = activities.filter((activity) => !activity.archived);
-  const settings = { ...defaultSettings, ...(candidate.settings ?? {}) };
+  const settings = {
+    ...defaultSettings,
+    ...(candidate.settings ?? {}),
+    theme: candidate.settings?.theme === 'light' ? 'light' as const : 'dark' as const,
+  };
   const rawPomodoro = candidate.pomodoro as Partial<PomodoroState> | undefined;
   const phase = rawPomodoro?.phase === 'shortBreak' || rawPomodoro?.phase === 'longBreak' ? rawPomodoro.phase : 'focus';
   const fallbackTargetSeconds = phaseDurationSeconds(phase, settings);

@@ -14,6 +14,7 @@ import { createId } from '../lib/id';
 import { phaseDurationSeconds, pomodoroSecondsLeft } from '../lib/timers';
 import {
   cancelPomodoroNotification,
+  configureNativeShell,
   schedulePomodoroNotification,
   tapFeedback,
 } from '../services/device';
@@ -94,6 +95,13 @@ export function AppStoreProvider({ children }: PropsWithChildren) {
     const root = document.documentElement;
     root.dataset.motion = state.settings.motion;
   }, [state.settings.motion]);
+
+  useEffect(() => {
+    const themeColor = state.settings.theme === 'light' ? '#f6f7fc' : '#080b17';
+    document.documentElement.dataset.theme = state.settings.theme;
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', themeColor);
+    void configureNativeShell(state.settings.theme);
+  }, [state.settings.theme]);
 
   const addActivity = useCallback((input: ActivityInput) => {
     dispatch({

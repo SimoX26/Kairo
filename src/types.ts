@@ -38,6 +38,7 @@ export interface RunningTimer {
 }
 
 export type PomodoroPhase = 'focus' | 'shortBreak' | 'longBreak';
+export type AppTheme = 'dark' | 'light';
 
 export interface PomodoroState {
   phase: PomodoroPhase;
@@ -52,6 +53,7 @@ export interface PomodoroState {
 }
 
 export interface AppSettings {
+  theme: AppTheme;
   focusMinutes: number;
   shortBreakMinutes: number;
   longBreakMinutes: number;

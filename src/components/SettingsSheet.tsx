@@ -63,6 +63,14 @@ export function SettingsSheet({ open, settings, onClose, onSave, onReset }: Sett
 
       <section className="settings-section">
         <h3>Esperienza</h3>
+        <fieldset className="theme-choice">
+          <legend>Tema</legend>
+          <div className="segmented segmented--two">
+            {([['dark', 'Scuro'], ['light', 'Chiaro']] as const).map(([value, label]) => (
+              <button key={value} type="button" aria-pressed={draft.theme === value} className={draft.theme === value ? 'is-active' : ''} onClick={() => setDraft({ ...draft, theme: value })}>{label}</button>
+            ))}
+          </div>
+        </fieldset>
         <Toggle checked={draft.soundEnabled} onChange={(value) => setDraft({ ...draft, soundEnabled: value })} label="Suono nell’app" />
         <Toggle checked={draft.hapticsEnabled} onChange={(value) => setDraft({ ...draft, hapticsEnabled: value })} label="Feedback aptico nell’app" />
         <label className="field field--range">

@@ -33,6 +33,7 @@ export const defaultActivities: Activity[] = [
 ];
 
 export const defaultSettings: AppSettings = {
+  theme: 'dark',
   focusMinutes: 25,
   shortBreakMinutes: 5,
   longBreakMinutes: 15,
