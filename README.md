@@ -27,7 +27,7 @@ npm run android:sync
 npm run android:apk
 ```
 
-L'APK debug viene prodotto in `android/app/build/outputs/apk/debug/app-debug.apk`; una copia pronta da installare può essere conservata in `artifacts/`. Per una release firmata si usa Android Studio o una configurazione Gradle con keystore privato (che non va committato).
+L'APK debug pronto da installare viene prodotto in `artifacts/Kairo.apk`. Per una release firmata si usa Android Studio o una configurazione Gradle con keystore privato (che non va committato).
 
 ## Dati locali
 

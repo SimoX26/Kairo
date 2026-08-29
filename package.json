@@ -12,7 +12,7 @@
     "test:watch": "TZ=Europe/Rome vitest",
     "android:sync": "npm run build && cap sync android",
     "android:open": "cap open android",
-    "android:apk": "npm run android:sync && cd android && ./gradlew assembleDebug"
+    "android:apk": "bash scripts/build-apk.sh"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.3",
