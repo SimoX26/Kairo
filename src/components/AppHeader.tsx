@@ -11,7 +11,7 @@ export function AppHeader({ eyebrow, title, onOpenSettings }: AppHeaderProps) {
     <header className="app-header">
       <div className="brand-lockup">
         <div className="brand-lockup__logo">
-          <img src="/kairo-logo.png" alt="" />
+          <img src={`${import.meta.env.BASE_URL}kairo-logo.png`} alt="" />
           <span className="brand-lockup__pulse" />
         </div>
         <div>

@@ -56,7 +56,7 @@ export default function App() {
     return (
       <main className="launch-screen">
         <div className="launch-screen__halo" />
-        <img src="/kairo-logo.png" alt="Kairo" />
+        <img src={`${import.meta.env.BASE_URL}kairo-logo.png`} alt="Kairo" />
         <strong>Kairo</strong>
         <span>Il tuo tempo sta per prendere forma</span>
         <div className="launch-loader"><i /><i /><i /></div>
