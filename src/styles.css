@@ -3017,33 +3017,36 @@ html[data-theme^='nature-'] .ambient-background::before {
   background-position: center top;
   background-size: cover;
   content: '';
+  filter: saturate(0.76) contrast(0.92);
 }
 
 html[data-theme='nature-dark'] .ambient-background::before {
   background-image: url('/nature-dark.webp');
-  opacity: 0.74;
+  opacity: 0.3;
 }
 
 html[data-theme='nature-light'] .ambient-background::before {
   background-image: url('/nature-light.webp');
-  opacity: 0.82;
+  opacity: 0.34;
 }
 
 html[data-theme^='nature-'] .ambient-background__grain {
-  opacity: 0.07;
+  opacity: 0.04;
 }
 
 html[data-theme^='nature-'] .ambient-background__one {
   top: -170px;
   right: -130px;
   background: var(--violet);
-  opacity: 0.13;
+  opacity: 0.08;
+  animation: none;
 }
 
 html[data-theme^='nature-'] .ambient-background__two {
   left: -170px;
   background: var(--coral);
-  opacity: 0.09;
+  opacity: 0.06;
+  animation: none;
 }
 
 html[data-theme='nature-dark'] .glass-card {
