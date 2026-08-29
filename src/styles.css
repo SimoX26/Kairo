@@ -511,7 +511,7 @@ img {
   place-items: center;
 }
 
-.progress-ring svg {
+.progress-ring > svg {
   position: absolute;
   inset: 0;
   width: 100%;
